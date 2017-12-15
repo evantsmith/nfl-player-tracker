@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Vue -->
+    <script src="https://unpkg.com/vue"></script>
+    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+    <!-- BS 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/nflData-main.css">
+    <title>NFL Data</title>
+</head>
+<body>
+    <!-- Vue for newVue-->
+    <div id="vue1">
+
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="/">NFL Player Tracker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- End Nav Bar -->
+
+        <!-- Main Container -->
+        <div id="main">
+
+            <!-- Main jumbotron -->
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-3">NFL Player Tracker</h1>
+                    <p>NFL Player Tracker is an applation where users sign up for a free account where they can save specific players to their profile. This application is designed to deliver current, acurate statistics of NFL Players and Teams with support from MySportsFeeds API. </p>
+                    <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> -->
+                </div>
+            </div>
+            <!-- End Jumbotron -->
+
+
+            <!-- Top Container -->
+            <div class='container-fluid' v-bind:style="{height: heightTop +'rem'}" id="top">
+
+                <!-- start row-1-t -->
+                <div class='flex-container-1' id='row-1-t'>
+
+                    <!-- NFC East -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/NFC.svg">
+                        </div>
+                        <div class="division">East</div>
+                        
+                    </div>
+
+                    <!-- Eagles -->
+                    <div class="flex-element" v-on:click="clickedEagles" v-bind:class="{ highlight : eaglesIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/PHI.svg" >
+                        </div>
+                        <div id="eaglesColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="eaglesBox">
+                            <label v-on:click="preventDefault" class="label1" for="eaglesBox">Philadelphia Eagles</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- Cowboys -->
+                    <div class="flex-element" v-on:click="clickedCowboys" v-bind:class="{ highlight : cowboysIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/DAL.svg" >
+                        </div>
+                        <div id="cowboysColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="cowboysBox" >
+                            <label v-on:click="preventDefault" class="label1" for="cowboysBox">Dallas Cowboys</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Redskins -->
+                    <div class="flex-element" v-on:click="clickedRedskins" v-bind:class="{ highlight : redskinsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/WAS.svg" >
+                        </div>
+                        <div id="redskinsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="redskinsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="redskinsBox">Washington Redskins</label> 
+
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Giants -->
+                    <div class="flex-element" v-on:click="clickedGiants" v-bind:class="{ highlight : giantsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/NYG.svg" >
+                        </div>
+                        <div id="giantsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="giantsBox">
+                            <label v-on:click="preventDefault" class="label1" for="giantsBox">New York Giants</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- NFC WEST -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/NFC.svg">
+                        </div>
+                        <div class="division">West</div>
+                        
+                    </div>
+
+                    <!-- Seattle Seahawks -->
+                    <div class="flex-element" v-on:click="clickedSeattle" v-bind:class="{ highlight : seattleIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/SEA.svg" >
+                        </div>
+                        <div id="seattleColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="seattleBox">
+                            <label v-on:click="preventDefault" class="label1" for="seattleBox">Seattle Seahawks</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- San Fransisco 49ers -->
+                    <div class="flex-element" v-on:click="clickedSanFran" v-bind:class="{ highlight : sanFranIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/SF.svg" >
+                        </div>
+                        <div id="sanFranColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="sanFranBox" >
+                            <label v-on:click="preventDefault" class="label1" for="sanFranBox">San Francisco 49ers</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Los Angeles Rams -->
+                    <div class="flex-element" v-on:click="clickedRams" v-bind:class="{ highlight : ramsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/LA.svg" >
+                        </div>
+                        <div id="ramsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="ramsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="ramsBox">Los Angeles Rams</label> 
+
+                        </div>
+
+                    </div>
+                    
+                    <!-- Arizona Cardinals -->
+                    <div class="flex-element" v-on:click="clickedCards" v-bind:class="{ highlight : azIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/ARI.svg" >
+                        </div>
+                        <div id="azColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="cardsBox">
+                            <label v-on:click="preventDefault" class="label1" for="cardsBox">Arizona Cardinals</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- NFC North -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/NFC.svg">
+                        </div>
+                        <div class="division">North</div>
+                        
+                    </div>
+
+                    <!-- Packers -->
+                    <div class="flex-element" v-on:click="clickedPackers" v-bind:class="{ highlight : packersIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/GB.svg" >
+                        </div>
+                        <div id="packersColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="packersBox">
+                            <label v-on:click="preventDefault" class="label1" for="packersBox">Green Bay Packers</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- Vikings -->
+                    <div class="flex-element" v-on:click="clickedVikings" v-bind:class="{ highlight : vikingsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/MIN.svg" >
+                        </div>
+                        <div id="vikingsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="vikingsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="vikingsBox">Minnesota Vikings</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Lions -->
+                    <div class="flex-element" v-on:click="clickedLions" v-bind:class="{ highlight : lionsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/DET.svg" >
+                        </div>
+                        <div id="lionsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="lionsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="lionsBox"><div style="color: rgba(0,0,0,0)">_</div>Detroit Lions<div style="color: rgba(0,0,0,0)">_</div></label> 
+
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Bears -->
+                    <div class="flex-element" v-on:click="clickedBears" v-bind:class="{ highlight : bearsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/CHI.svg" >
+                        </div>
+                        <div id="bearsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="bearsBox">
+                            <label v-on:click="preventDefault" class="label1" for="bearsBox">Chicago Bears</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- NFC South -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/NFC.svg">
+                        </div>
+                        <div class="division">South</div>
+                        
+                    </div>
+
+                    <!-- Saints -->
+                    <div class="flex-element" v-on:click="clickedSaints" v-bind:class="{ highlight : saintsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/NO.svg" >
+                        </div>
+                        <div id="saintsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="saintsBox">
+                            <label v-on:click="preventDefault" class="label1" for="saintsBox">New Orleans Saints</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- Falcons -->
+                    <div class="flex-element" v-on:click="clickedFalcons" v-bind:class="{ highlight : falconsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/ATL.svg" >
+                        </div>
+                        <div id="falconsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="falconsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="falconsBox">Atlanta Falcons</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Buccaneers -->
+                    <div class="flex-element" v-on:click="clickedBucs" v-bind:class="{ highlight : bucsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/TB.svg" >
+                        </div>
+                        <div id="bucsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="bucsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="bucsBox">Tampa Bay Buccaneers</label> 
+
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Panthers -->
+                    <div class="flex-element" v-on:click="clickedPanthers" v-bind:class="{ highlight : panthersIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/CAR.svg" >
+                        </div>
+                        <div id="panthersColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="panthersBox">
+                            <label v-on:click="preventDefault" class="label1" for="panthersBox">Carolina Panthers</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- AFC East -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/AFC.svg">
+                        </div>
+                        <div class="divisionAFC">East</div>
+                        
+                    </div>
+
+                    <!-- New England -->
+                    <div class="flex-element" v-on:click="clickedPats" v-bind:class="{ highlight : patsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/NE.svg" >
+                        </div>
+                        <div id="patsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="patsBox">
+                            <label v-on:click="preventDefault" class="label1" for="patsBox">New England Patriots</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- Miami -->
+                    <div class="flex-element" v-on:click="clickedDolphins" v-bind:class="{ highlight : dolphinsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/MIA.svg" >
+                        </div>
+                        <div id="dolphinsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="dolphinsBox" >
+
+                            <label v-on:click="preventDefault" class="label1" for="dolphinsBox">Miami Dolphins</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Buffalo -->
+                    <div class="flex-element" v-on:click="clickedBills" v-bind:class="{ highlight : billsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/BUF.svg" >
+                        </div>
+                        <div id="billsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="billsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="billsBox"><div style="color: rgba(0,0,0,0)">_</div>Buffalo Bills<div style="color: rgba(0,0,0,0)">_</div></label> 
+
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Jets -->
+                    <div class="flex-element" v-on:click="clickedJets" v-bind:class="{ highlight : jetsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/NYJ.svg" >
+                        </div>
+                        <div id="jetsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="jetsBox">
+                            <label v-on:click="preventDefault" class="label1" for="jetsBox"><div style="color: rgba(0,0,0,0)">_</div>New York Jets<div style="color: rgba(0,0,0,0)">_</div></label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- AFC WEST -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/AFC.svg">
+                        </div>
+                        <div class="divisionAFC">West</div>
+                        
+                    </div>
+
+                    <!-- Broncos -->
+                    <div class="flex-element" v-on:click="clickedBroncos" v-bind:class="{ highlight : broncosIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/DEN.svg" >
+                        </div>
+                        <div id="broncosColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="broncosBox" >
+                            <label v-on:click="preventDefault" class="label1" for="broncosBox">Denver Broncos<div style="color: rgba(0,0,0,0)">_</div></label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Cheifs -->
+                    <div class="flex-element" v-on:click="clickedCheifs" v-bind:class="{ highlight : cheifsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/KC.svg" >
+                        </div>
+                        <div id="cheifsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="cheifsBox">
+                            <label v-on:click="preventDefault" class="label1" for="cheifsBox">Kansas City Chiefs</label> 
+
+                        </div>
+
+                    </div>
+                    
+
+                    <!-- Charger -->
+                    <div class="flex-element" v-on:click="clickedChargers" v-bind:class="{ highlight : chargersIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/LAC.svg" >
+                        </div>
+                        <div id="chargersColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="chargersBox" >
+                            <label v-on:click="preventDefault" class="label1" for="chargersBox">Los Angeles Chargers</label> 
+
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Raiders -->
+                    <div class="flex-element" v-bind:class="{ highlight : raidersIsChecked}" v-on:click="clickedRaiders">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/OAK.svg" >
+                        </div>
+                        <div id="raidersColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="raidersBox">
+                            <label v-on:click="preventDefault" class="label1" for="raidersBox">Oakland Raiders<div style="color: rgba(0,0,0,0)">_</div></label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- AFC North -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/AFC.svg">
+                        </div>
+                        <div class="divisionAFC">North</div>
+                        
+                    </div>
+
+                    <!-- Steelers -->
+                    <div class="flex-element" v-on:click="clickedSteelers" v-bind:class="{ highlight : steelersIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/PIT.svg" >
+                        </div>
+                        <div id="steelersColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="steelersBox">
+                            <label v-on:click="preventDefault" class="label1" for="steelersBox">Pittsburgh Steelers</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- Ravens -->
+                    <div class="flex-element" v-on:click="clickedRavens" v-bind:class="{ highlight : ravensIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/BAL.svg" >
+                        </div>
+                        <div id="ravensColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="ravensBox" >
+                            <label v-on:click="preventDefault" class="label1" for="ravensBox">Baltimore Ravens</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Bengals -->
+                    <div class="flex-element" v-on:click="clickedBengals" v-bind:class="{ highlight : bengalsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/CIN.svg" >
+                        </div>
+                        <div id="bengalsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="bengalsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="bengalsBox">Cincinnati Bengals</label> 
+
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Browns -->
+                    <div class="flex-element" v-on:click="clickedBrowns" v-bind:class="{ highlight : brownsIsChecked}">
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/CLE.svg" >
+                        </div>
+                        <div id="brownsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="brownsBox">
+                            <label v-on:click="preventDefault" class="label1" for="brownsBox">Cleveland Browns</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- AFC South -->
+                    <div class="flex-element" >
+                        <div id="divNFC" >
+                            <img id="NFC" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/league/AFC.svg">
+                        </div>
+                        <div class="divisionAFC">South</div>
+                        
+                    </div>
+
+                    <!-- Jaguars -->
+                    <div class="flex-element" v-bind:class="{ highlight : jagsIsChecked}" v-on:click="clickedJags" >
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/JAX.svg" >
+                        </div>
+                        <div id="jagsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="jagsBox">
+                            <label v-on:click="preventDefault" class="label1" for="jagsBox">Jacksonville Jaguars</label> 
+
+                        </div>
+
+                    </div>
+                    <!-- Titans -->
+                    <div class="flex-element" v-bind:class="{ highlight : titansIsChecked}" v-on:click="clickedTitans" >
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/TEN.svg" >
+                        </div>
+                        <div id="titansColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="titansBox" >
+                            <label v-on:click="preventDefault" class="label1" for="titansBox">Tennessee Titans</label> 
+
+                        </div>
+
+                    </div>
+
+                    <!-- Colts -->
+                    <div class="flex-element" v-bind:class="{ highlight : coltsIsChecked}" v-on:click="clickedColts" >
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/IND.svg" >
+                        </div>
+                        <div id="coltsColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="coltsBox" >
+                            <label v-on:click="preventDefault" class="label1" for="coltsBox">Indianapolis Colts</label> 
+
+                        </div>
+
+                    </div>
+                    
+                    <!-- Texans -->
+                    <div class="flex-element" v-bind:class="{ highlight : texansIsChecked}" v-on:click="clickedTexans" >
+
+                        <div id="divLogo" >
+                            <img id="logo" src="https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/HOU.svg" >
+                        </div>
+                        <div id="texansColors" class="boxAndLabel" >
+                            
+                            <input type="checkbox" class="checkBox" id="texansBox">
+                            <label v-on:click="preventDefault" class="label1" for="texansBox">Houston Texans<div style="color: rgba(0,0,0,0)">_</div></label> 
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end row-1-t -->
+
+
+                <!-- start row-2-t -->
+                <div class='flex-container-2' id='row-2-t'>
+
+                        <div class="flex-element-3">
+                            <div class="positionText" >Offensive Positions</div>
+                        </div> 
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : qbIsChecked}" v-on:click="clickedQB" >
+                            <label class="label2" v-on:click="preventDefault" for="qbBox">QB</label>
+                            <input type="checkbox" class="checkbox1" id="qbBox">     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : rbIsChecked}" v-on:click="clickedRB">
+                            <label class="label2" v-on:click="preventDefault" for="rbBox">RB</label>
+                            <input type="checkbox" class="checkbox1" id="rbBox">     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : wrIsChecked}" v-on:click="clickedWR">
+                            <label class="label2" v-on:click="preventDefault" for="wrBox">WR</label>
+                            <input type="checkbox" class="checkbox1" id="wrBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : teIsChecked}" v-on:click="clickedTE">
+                            <label class="label2" v-on:click="preventDefault" for="teBox">TE</label>
+                            <input type="checkbox" class="checkbox1" id="teBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : kIsChecked}" v-on:click="clickedK">
+                            <label class="label2" v-on:click="preventDefault" for="kBox">K</label>
+                            <input type="checkbox" class="checkbox1" id="kBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : pIsChecked}" v-on:click="clickedP">
+                            <label class="label2" v-on:click="preventDefault" for="pBox">P</label>
+                            <input type="checkbox" class="checkbox1" id="pBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : cIsChecked}" v-on:click="clickedC">
+                            <label class="label2" v-on:click="preventDefault" for="cBox">C</label>
+                            <input type="checkbox" class="checkbox1" id="cBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : tIsChecked}" v-on:click="clickedT">
+                            <label class="label2" v-on:click="preventDefault" for="tBox">T</label>
+                            <input type="checkbox" class="checkbox1" id="tBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : gIsChecked}" v-on:click="clickedG">
+                            <label class="label2" v-on:click="preventDefault" for="gBox">G</label>
+                            <input type="checkbox" class="checkbox1" id="gBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : lsIsChecked}" v-on:click="clickedls">
+                            <label class="label2" v-on:click="preventDefault" for="lsBox">LS</label>
+                            <input type="checkbox" class="checkbox1" id="lsBox" >     
+                        </div>
+
+                        
+                </div> 
+                <!-- end row-2-t -->
+
+                <!-- start row-3-t -->
+                <div class='flex-container-2' id='row-3-t'>
+
+                        <div class="flex-element-3" >
+                            <div class="positionText" >Defensive Positions</div>
+                        </div> 
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : dtIsChecked}" v-on:click="clickedDT">
+                            <label class="label2" v-on:click="preventDefault" for="dtBox">DT</label>
+                            <input type="checkbox" class="checkbox1" id="dtBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : deIsChecked}" v-on:click="clickedDE">
+                            <label class="label2" v-on:click="preventDefault" for="deBox">DE</label>
+                            <input type="checkbox" class="checkbox1" id="deBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : lbIsChecked}" v-on:click="clickedLB">
+                            <label class="label2" v-on:click="preventDefault" for="lbBox">LB</label>
+                            <input type="checkbox" class="checkbox1" id="lbBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : cbIsChecked}" v-on:click="clickedCB">
+                            <label class="label2" v-on:click="preventDefault" for="cbBox">CB</label>
+                            <input type="checkbox" class="checkbox1" id="cbBox" >     
+                        </div>
+
+                        <div class="flex-element-2" v-bind:class="{ highlight : sIsChecked}" v-on:click="clickedS">
+                            <label class="label2" v-on:click="preventDefault" for="sBox">S</label>
+                            <input type="checkbox" class="checkbox1" id="sBox" >     
+                        </div> 
+                    
+                </div>
+                <!-- end row-3-t -->
+
+                <!-- start row-4-t -->
+                <div class='flex-container-2' id='row-4-t'>
+
+                    <div class="flex-element-3" id="words" >
+                        <div class="positionText">Enter player Last Name <em>or</em> First & Last Name: </div>
+                    </div>
+                    <div class="flex-element-3" >
+                        <input v-model="playerNameString" id="player">
+                    </div>
+
+                    <div class="flex-element-3">
+                        <button v-on:click="search($event)" id="searchBtn">Search</button>
+                    </div>
+                    
+                </div>
+                <!-- end row-4-t -->
+
+                <!-- start row-5-t -->
+                <div class="flex-container-2" v-bind:style="{height: heightRow5 + 'rem'}" id='row-5-t'> 
+
+                    <!-- Panel Collapse -->
+                    <div class="tablist1" v-bind:style="{height: heightTabList + 'rem'}" role="tablist">
+                        <player-collapse v-for="(player1, index) in searchedQBsArr" v-bind:maintext="player1.mainText" v-bind:collapsetext="player1.collapseText" v-on:edit-heights="editHeights2(player1)" v-bind:index="index"></player-collapse>
+                    </div>
+                    
+                </div>
+                <!-- end row-5-t -->
+a
+            </div>
+            <!-- End Top Container -->
+
+            <footer> This Website For NON-Commercial Use | Data brought to you by MySportsFeeds  </footer>
+
+        </div> 
+        <!-- End Main Container -->
+
+    </div> 
+    <!-- End vue1 -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- BS JS Jquery-->
+    <!-- BS JS Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <!-- BS JS Pluggins -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- Linking to main JS -->
+    <script src="/js/nflData-main.js"></script>
+</body>
+</html>
+
+
+<!-- Team Dropdown -->
+                    <!-- div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <Select Team>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    </div> -->

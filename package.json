@@ -1,0 +1,23 @@
+{
+  "name": "nfldata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nflData-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evantsmith/nlfData.git"
+  },
+  "keywords": [
+    "nfl",
+    "stats"
+  ],
+  "author": "Evan Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evantsmith/nlfData/issues"
+  },
+  "homepage": "https://github.com/evantsmith/nlfData#readme"
+}
